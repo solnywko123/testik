@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.8
 
 ENV PYTHONENCODING UTF-8
 ENV TZ=Asia/Bishkek
@@ -9,15 +9,13 @@ WORKDIR /usr/src/app
 
 COPY requirements.txt ./
 
-RUN pip3 install --no-cache-dir -r requirements.txt
-
-RUN pip3 install gunicorn
+RUN pip install --no-cache-dir -r requirements.txt
 
 RUN mkdir static && mkdir media
 
 COPY . .
 
-RUN python3 manage.py collectstatic --noinput
+RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
 
